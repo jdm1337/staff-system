@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StaffSystem.SharedKernel.Interfaces
+namespace StaffSystem.Core.ProjectAggregate.Identity
 {
-    public interface IEntity
+    public enum Gender
     {
-        string Id { get; set; }
+        male,
+        female
     }
 }
