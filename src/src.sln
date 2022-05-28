@@ -5,13 +5,16 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0F3D448D-CBB7-4681-AB75-36C596F95CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffSystem.Web", "StaffSystem.Web\StaffSystem.Web.csproj", "{C9A5D333-5B17-4C7E-8D20-22979C26B3A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffSystem.Web", "StaffSystem.Web\StaffSystem.Web.csproj", "{C9A5D333-5B17-4C7E-8D20-22979C26B3A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0596C90A-3F32-4F42-A79F-C6F3B801E0AD} = {0596C90A-3F32-4F42-A79F-C6F3B801E0AD}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffSystem.Core", "StaffSystem.Core\StaffSystem.Core.csproj", "{0596C90A-3F32-4F42-A79F-C6F3B801E0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffSystem.Core", "StaffSystem.Core\StaffSystem.Core.csproj", "{0596C90A-3F32-4F42-A79F-C6F3B801E0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffSystem.Infrastructure", "StaffSystem.Infrastructure\StaffSystem.Infrastructure.csproj", "{3CBCBC3F-D610-4464-8F55-FDE9A400E877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffSystem.Infrastructure", "StaffSystem.Infrastructure\StaffSystem.Infrastructure.csproj", "{3CBCBC3F-D610-4464-8F55-FDE9A400E877}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffSystem.SharedKernel", "StaffSystem.SharedKernel\StaffSystem.SharedKernel.csproj", "{49A9E7A1-E5A0-4DF2-B6FD-EF02B932A3C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffSystem.SharedKernel", "StaffSystem.SharedKernel\StaffSystem.SharedKernel.csproj", "{49A9E7A1-E5A0-4DF2-B6FD-EF02B932A3C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

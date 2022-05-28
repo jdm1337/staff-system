@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using StaffSystem.SharedKernel;
 using StaffSystem.SharedKernel.Interfaces;
 
 namespace StaffSystem.Core.ProjectAggregate.Identity
 {
-    public class User : IdentityUser<int>, IEntity
+    public class User : EntityBase
     {
         public string FirstName { get; set; }
         public string Surname { get; set; }

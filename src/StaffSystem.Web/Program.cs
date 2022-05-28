@@ -1,7 +1,11 @@
+using Microsoft.Extensions.DependencyInjection;
+using StaffSystem.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddEntityFrameworkSqlite().AddDbContext<AppDbContext>();
 
 var app = builder.Build();
 
