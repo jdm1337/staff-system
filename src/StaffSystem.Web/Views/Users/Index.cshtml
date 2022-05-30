@@ -1,0 +1,106 @@
+﻿@using StaffSystem.Core.Extensions
+@using StaffSystem.Core.ProjectAggregate.Identity
+@model StaffSystem.Web.Models.UsersViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-action="Index" method="get">
+    <div class="row">
+        <div class="form-group" style="padding-right: 20px">
+            <select class="form-select" aria-label="Default select example" name="position">
+                <option selected>Должность</option>
+                @foreach(Positions pos in Enum.GetValues(typeof(Positions))) {
+                      <option value="@((int)pos)">@pos.GetDisplayName()</option>   
+                }
+            </select>
+     </div>
+      <div class="form-group" style="padding-right: 20px">
+            <select class="form-select" aria-label="Default select example" name="department">
+                <option selected>Подразделение</option>
+                @foreach(Departments dep in Enum.GetValues(typeof(Departments))) {
+                      <option value="@((int)dep)">@dep.GetDisplayName()</option>   
+                }
+            </select>
+     </div>
+     <a asp-action="Index">Сбросить</a>
+    </div>
+    <div class="row"></div>
+        <input type="submit" value="Отфильтровать" class="btn btn-info" />
+        <a asp-controller="Users" asp-action="add"
+    
+            class="btn btn-info">
+            Добавить пользователя
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+    </div>
+     
+</form>
+
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Пользователи</h3>
+
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" >
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ФИО</th>
+                      <th>Подразделение</th>
+                      <th>Должность</th>
+                    </tr>
+                  </thead>
+                  <tbody> 
+                        @foreach (var user in Model.Users.Data)
+                        {
+                        <tr>
+                            <td>
+                                <a href="~/Profile/@user.Id"
+                                    class="">
+                                    @user.FirstName @user.Surname @user.Patronymic
+                                </a>
+                            </td>
+                            <td>
+                                @{
+                                    var department = user.Department.GetDisplayName() == null ? "Не указана" : user.Department.GetDisplayName();
+                                }
+                                @department
+                            </td>
+                            <td>
+                                 @{
+                                    var position = user.Position.GetDisplayName() == null ? "Не указана" : user.Position.GetDisplayName();
+                                }
+                                @position
+                            </td>
+                        </tr>
+                        }       
+                  </tbody>
+                </table>
+                <cs-pager cs-paging-pagenumber=@Model.Users.PageNumber
+                          cs-paging-totalitems=@Model.Users.TotalItems
+                          cs-paging-pagesize=@Model.Users.PageSize
+                          cs-pagenumber-param="pagenumber"
+                          asp-controller="Users"
+                          asp-action="Index"
+                          cs-pager-li-current-class="page-item active"
+                          cs-pager-li-other-class="page-item"
+                          cs-pager-li-non-active-class="page-item disabled"
+                          cs-pager-link-current-class="page-link"
+                          cs-pager-link-other-class="page-link">
+                          
+
+                </cs-pager>
+                        
+
+              </div>
+              <!-- /.card-body -->
+    </div>
+            <!-- /.card -->
+</div>

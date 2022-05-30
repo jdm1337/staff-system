@@ -27,23 +27,24 @@ namespace StaffSystem.Infrastructure.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ControllerName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Department")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("DepartmentName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Patronymic")
                         .IsRequired()
@@ -53,7 +54,6 @@ namespace StaffSystem.Infrastructure.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ProjectName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Surname")

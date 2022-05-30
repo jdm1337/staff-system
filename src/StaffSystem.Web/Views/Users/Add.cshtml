@@ -1,0 +1,103 @@
+﻿@using StaffSystem.Core.Extensions
+@using StaffSystem.Core.ProjectAggregate.Identity
+@model StaffSystem.Web.Models.UserViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<p>Добавление пользователя</p>
+<form asp-controller="Users" asp-action="add" method="post" name="addUserForm"  asp-route-returnUrl="~/index">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="row">
+    <div class="col">
+      <label asp-for="FirstName">Имя</label><br/>
+      <input asp-for="FirstName" type="text" class="form-control" placeholder="Иван">
+      <span asp-validation-for="FirstName"></span>
+    </div>
+    <div class="col">
+      <label asp-for="Surname">Фамилия</label><br/>
+      <input asp-for="Surname" type="text" class="form-control" placeholder="Иванов">
+      <span asp-validation-for="Surname"></span>
+    </div>
+    <div class="col">
+      <label asp-for="Patronymic">Отчество</label><br/>  
+      <input asp-for="Patronymic" type="text" class="form-control" placeholder="Иванович">
+      <span asp-validation-for="Patronymic"></span>
+    </div>
+  </div>
+  <label asp-for="BirthDay">Дата рождения</label><br/>
+  <input asp-for="BirthDay" type="date" class="form-control" />
+  <span asp-validation-for="BirthDay"></span>
+  <b>Пол</b>
+  <div class="form-check">
+    <input asp-for="Gender" class="form-check-input" type="radio" value="мужской" id="flexRadioDefault1" checked>
+    <label asp-for="Gender" class="form-check-label" >
+     мужской
+    </label>
+  </div>
+<div class="form-check">
+  <input asp-for="Gender" class="form-check-input" type="radio"  id="flexRadioDefault2" value="женский" >
+  <label asp-for="Gender" class="form-check-label" for="flexRadioDefault2">
+    женский
+  </label>
+</div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+  <div class="row">
+  <div class="form-group" style="padding-right: 20px;">
+            <select asp-for="Department" class="form-select" aria-label="Default select example" name="department">
+                <option selected>Подразделение</option>
+                @foreach(Departments dep in Enum.GetValues(typeof(Departments))) {
+                      <option value="@((int)dep)">@dep.GetDisplayName()</option>   
+                }
+            </select>
+            <span asp-validation-for="Department"></span>
+     </div>
+  <div class="form-group">
+            <select asp-for="Position" class="form-select" aria-label="Default select example" name="position">
+                <option selected>Должность</option>
+                @foreach(Positions pos in Enum.GetValues(typeof(Positions))) {
+                      <option value="@((int)pos)">@pos.GetDisplayName()</option>   
+                }
+            </select>
+            <span asp-validation-for="Position"></span>
+     </div>
+   </div>
+   <div name="directorValue" id="directorValue" hidden>
+       <label asp-for="CompanyName">Компания</label><br/>
+      <input asp-for="CompanyName" type="text" class="form-control" placeholder="Deeplay">
+      <span asp-validation-for="CompanyName"></span>
+  </div>
+  <div name="departmentHeadValue" id="departmentHeadValue" hidden>
+       <label asp-for="DepartmentName">Руководимое подразделение</label><br/>
+      <input asp-for="DepartmentName" type="text" class="form-control" placeholder="Разработка ПО">
+      <span asp-validation-for="DepartmentName"></span>
+  </div>
+  <div name="controllerValue" id="controllerValue" hidden>
+       <label asp-for="ProjectName">Контролируемый проект</label><br/>
+      <input asp-for="ProjectName" type="text" class="form-control" placeholder="Сервис развлечений">
+      <span asp-validation-for="FirstName"></span>
+  </div>
+  <div name="workerValue" id="workerValue" hidden>
+       <label asp-for="ControllerName">Контролер проекта</label><br/>
+      <input asp-for="ControllerName" type="text" class="form-control" placeholder="Сидоров Иван Михайлович">
+      <span asp-validation-for="ControllerName"></span>
+  </div>
+   <br />
+   <input type="submit" value="Добавить" class="btn btn-info" />
+</form>
+
+<script type="text/javascript">
+    var form = document.forms.addUserForm;
+    form.position.onchange = function() {
+        document.getElementById('directorValue').hidden = (this.value !== "1");
+        document.getElementById('departmentHeadValue').hidden = (this.value !== "2");
+        document.getElementById('controllerValue').hidden = (this.value !== "3");
+        document.getElementById('workerValue').hidden = (this.value !== "4");
+         
+    }
+</script>
