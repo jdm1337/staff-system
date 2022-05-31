@@ -1,13 +1,13 @@
 ﻿@using StaffSystem.Core.Extensions
 @using StaffSystem.Core.ProjectAggregate.Identity
-@model StaffSystem.Web.Models.UserViewModel
+@model StaffSystem.Web.Models.UserViewModel;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-<h3>Добавление пользователя</h3>
-<form asp-controller="Users" asp-action="add" method="post" name="addUserForm"  asp-route-returnUrl="~/index">
+<h3>Изменение пользователя</h3>
+<form asp-action="edit" asp-controller="users" name="editUserForm"  asp-route-id="@Model.Id" method="post">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="row">
     <div class="col">
@@ -53,7 +53,7 @@
             <span asp-validation-for="Department"></span>
      </div>
   <div class="form-group">
-            <select asp-for="Position" class="form-select" aria-label="Default select example" name="position">
+            <select asp-for="Position" class="form-select" aria-label="Default select example" name="position" id="PositionSelect">
                 <option selected>Должность</option>
                 @foreach(Positions pos in Enum.GetValues(typeof(Positions))) {
                       <option value="@((int)pos)">@pos.GetDisplayName()</option>   
@@ -83,16 +83,33 @@
       <span asp-validation-for="ControllerName"></span>
   </div>
    <br />
-   <input type="submit" value="Добавить" class="btn btn-info" />
+   <input type="submit" value="Изменить" class="btn btn-info" />
 </form>
-
+@{
+    var position = (int)Model.Position;
+}
 <script type="text/javascript">
-    var form = document.forms.addUserForm;
+    var form = document.forms.editUserForm;
+    switch (@position){
+        case 1:
+            document.getElementById('directorValue').hidden = document.getElementById('directorValue').hidden = false;
+            break;
+        case 2:
+            document.getElementById('departmentHeadValue').hidden = false;
+            break;
+        case 3:
+            document.getElementById('controllerValue').hidden = false;
+            break;
+        case 4:
+            document.getElementById('workerValue').hidden = false;
+            break;
+        default:
+            console.log("error")
+    }
     form.position.onchange = function() {
         document.getElementById('directorValue').hidden = (this.value !== "1");
         document.getElementById('departmentHeadValue').hidden = (this.value !== "2");
         document.getElementById('controllerValue').hidden = (this.value !== "3");
-        document.getElementById('workerValue').hidden = (this.value !== "4");
-         
+        document.getElementById('workerValue').hidden = (this.value !== "4");       
     }
 </script>

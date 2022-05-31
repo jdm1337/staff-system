@@ -1,6 +1,122 @@
-﻿@model StaffSystem.Web.Models.UsersViewModel
+﻿@using StaffSystem.Core.Extensions
+@model StaffSystem.Web.Models.UserViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+<div class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Профиль</h1>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="~/home/index">Главная</a></li>
+                      <li class="breadcrumb-item active">Профиль</li>
+                    </ol>
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
+              </div><!-- /.container-fluid -->
+<div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="~/dist/img/default-user.png"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">@Model.Surname @Model.FirstName @Model.Patronymic</h3>
+
+                <p class="text-muted text-center">@Model.Position.GetDisplayName()</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Подразделение</b> <a class="float-right">@Model.Department.GetDisplayName()</a>
+                  </li>
+                </ul>
+                <div class="row">
+                <form action="~/users/promotion/@Model.Id" method="post" style="padding-left: 20px; padding-right: 20px">
+                    <div class="input-group-prepend">
+                    <input type="submit" value="Повысить" class="btn btn-warning" />
+                  </div>
+                </form>
+
+                <a class="btn btn-info" asp-route-id="@Model.Id" asp-action="edit" asp-controller="users" >
+                    Изменить
+                </a>
+
+                <form action="~/users/delete/@Model.Id" method="post" style="padding-left: 20px; padding-right: 20px">
+                    <div class="input-group-prepend">
+                    <input type="submit" value="Удалить " class="btn btn-danger" />
+                  </div>
+                </form>
+                </div>
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Информация о пользователе</a></li>
+
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                    <!-- Post -->
+                    <div class="post">
+                         
+                        <p>Дата рождения: @Model.BirthDay.ToString("dd.MM.yyyy")</p>
+                        <p>Пол: @Model.Gender</p>   
+                                    @{
+                                        if(Model.CompanyName != null)
+                                        {
+                                            <p>Директор компании: @Model.CompanyName</p>
+                                        }
+                                        if(Model.DepartmentName != null)
+                                        {
+                                            <p>Руководитель поздразделения: @Model.DepartmentName</p>
+                                        }
+                                        if(Model.ProjectName != null)
+                                        {
+                                            <p>Контроллер проекта: @Model.ProjectName</p>
+                                        }
+                                        if(Model.ControllerName != null)
+                                        {
+                                            <p>ФИО начальника: @Model.ControllerName</p>
+                                        }
+                                    }
+                    </div>   
+              </div>  
+                    </div>
+                    <!-- /.post -->
+                  </div>
+                  <!-- /.tab-pane -->
+                  
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="settings">
+                        
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->

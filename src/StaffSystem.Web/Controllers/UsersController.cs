@@ -27,7 +27,7 @@ namespace StaffSystem.Web.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int department = -1, int position=-1, int pageNumber = 1, int pageSize = 1)
+        public async Task<IActionResult> Index(int department = -1, int position=-1, int pageNumber = 1, int pageSize = 4)
         {
             ViewBag.DeparmentFilter = department;
             ViewBag.Position = position;
@@ -55,16 +55,32 @@ namespace StaffSystem.Web.Controllers
             });
         }
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Promotion(string id)
+        [HttpPost]
+        public async Task<IActionResult> Promotion(int id)
         {
-            return null;
+            var user = await _context.Users.FindAsync(id);
+            if(user == null)
+                return NotFound();
+
+            if(user.Position != Positions.Director)
+            {
+                // promotion by decreasing position enum
+                user.Position = (Positions) ((int)user.Position) - 1;
+            }
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
-        [HttpPost("{id}")]
-        public async  Task<IActionResult> Delete(string id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            return null;
+            var user = await _context.Users.FindAsync(id);
+            if(user == null)
+                return NotFound();
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -87,12 +103,31 @@ namespace StaffSystem.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost("update")]
-        public async Task<IActionResult> Update()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return null;
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+                return NotFound();
+            UserViewModel model = _mapper.Map<UserViewModel>(user);
+            return View(model);
         }
-        [HttpGet("{id}")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = _mapper.Map<User>(model);
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("index");
+
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Profile(int id)
         {
             var user = await _context.Users.FindAsync(id);

@@ -14,7 +14,10 @@ namespace StaffSystem.Web.AutomapperProfiles
         public UserProfile()
         {
             CreateMap<User, UserViewModel>()
-                
+                .ForMember(
+                    dest => dest.Id,
+                    from => from.MapFrom(x => x.Id)
+                )
                 .ForMember(
                     dest => dest.FirstName,
                     from => from.MapFrom(x => x.FirstName)
