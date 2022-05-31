@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\build\scss\**" />
+    <Compile Remove="wwwroot\plugins\fontawesome-free\**" />
     <Content Remove="wwwroot\build\scss\**" />
+    <Content Remove="wwwroot\plugins\fontawesome-free\**" />
     <EmbeddedResource Remove="wwwroot\build\scss\**" />
+    <EmbeddedResource Remove="wwwroot\plugins\fontawesome-free\**" />
     <None Remove="wwwroot\build\scss\**" />
+    <None Remove="wwwroot\plugins\fontawesome-free\**" />
   </ItemGroup>
 
   <ItemGroup>
