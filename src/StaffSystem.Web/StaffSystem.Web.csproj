@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\build\scss\**" />
+    <Content Remove="wwwroot\build\scss\**" />
+    <EmbeddedResource Remove="wwwroot\build\scss\**" />
+    <None Remove="wwwroot\build\scss\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="cloudscribe.Pagination.Models" Version="1.1.0" />
@@ -21,6 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\StaffSystem.Infrastructure\StaffSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\StaffSystem.Services\StaffSystem.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\dist\css\" />
   </ItemGroup>
 
 </Project>
