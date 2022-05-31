@@ -31,6 +31,7 @@ namespace StaffSystem.Web.Controllers
         {
             ViewBag.DeparmentFilter = department;
             ViewBag.Position = position;
+
             int excludeRecords = (pageSize * pageNumber) - pageSize;
             await _userFilterService.FilterAsync(department, position);
 
@@ -39,7 +40,6 @@ namespace StaffSystem.Web.Controllers
             users = users
                 .Skip(excludeRecords)
                 .Take(pageSize);
-
 
             var result = new PagedResult<User>
             {
@@ -78,6 +78,7 @@ namespace StaffSystem.Web.Controllers
             var user = await _context.Users.FindAsync(id);
             if(user == null)
                 return NotFound();
+
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -94,7 +95,7 @@ namespace StaffSystem.Web.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            
+
             // map all params because User entity additional fields are specified as nullable
             var user = _mapper.Map<User>(model);
             await _context.Users.AddAsync(user);
@@ -113,6 +114,7 @@ namespace StaffSystem.Web.Controllers
             UserViewModel model = _mapper.Map<UserViewModel>(user);
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(UserViewModel model)
         {
@@ -124,7 +126,6 @@ namespace StaffSystem.Web.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return RedirectToAction("index");
-
         }
 
         [HttpGet]
@@ -137,6 +138,5 @@ namespace StaffSystem.Web.Controllers
             var userViewModel = _mapper.Map<UserViewModel>(user);
             return View(userViewModel);
         }
-
     }
 }

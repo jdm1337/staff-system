@@ -2,7 +2,6 @@
 using StaffSystem.Core.ProjectAggregate.Identity;
 using StaffSystem.Infrastructure.Data;
 
-
 namespace StaffSystem.Services
 {
     public class UserFilterService : IUserFilterService
@@ -26,7 +25,11 @@ namespace StaffSystem.Services
                     Department = u.Department
                 });
 
-            if(department > -1)
+            /*
+             Сheck that department or position is not a specified value
+             If department or position is specified then filtering by given value
+             */
+            if (department > -1)
             {
                 users = users.Where(u => ((int)u.Department) == department);
             }

@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StaffSystem.Core.Interfaces;
 using StaffSystem.Core.ProjectAggregate.Identity;
 
-
 namespace StaffSystem.Infrastructure.Data
 {
-
     public class AppDbContext : DbContext, IDbContext
     {
         public virtual DbSet<User> Users { get; set; }

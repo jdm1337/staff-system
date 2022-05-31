@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using StaffSystem.Core.ProjectAggregate.Identity;
 using StaffSystem.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StaffSystem.Web.AutomapperProfiles
 {
