@@ -9,4 +9,4 @@ The created application solves the following tasks:
 
 ## How to use
 
-The application uses a SQLite database which already stores the test data (users) and resides in the project's repository. Therefore, you do not need to configure a connection to the database and just **run** the **StaffSystem.Web** module.
+The application uses a SQLite database which already stores the test data (users) and locate in the project's repository. Therefore, you do not need to configure a connection to the database and just **run** the **StaffSystem.Web** module.
